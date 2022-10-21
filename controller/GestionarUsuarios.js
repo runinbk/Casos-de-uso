@@ -29,7 +29,7 @@ export const createUsuario = async (req, res) => {
     req.body;
   const [result] = await pool.query(
     "insert into USUARIO(login, password ) values(?,?)",
-    []
+    [ login, password]
   );
   res.json({
     id: result.insertId,
