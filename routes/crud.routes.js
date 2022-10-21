@@ -1,19 +1,47 @@
-import { Router } from 'express';
+import { Router } from "express";
 import {
- getEmpleados,
- getEmpleado,
- createEmpleado,
- updateEmpleado,
- deleteEmpleado
-} from "../controller/crud.js";
+  getEmpleados,
+  getEmpleado,
+  createEmpleado,
+  updateEmpleado,
+  deleteEmpleado,
+} from "../controller/GestionarEmpleados.js";
+import {
+  getUsuarios,
+  getUsuario,
+  createUsuario,
+  updateUsuario,
+  deleteUsuario,
+} from "../controller/GestionarUsuarios.js";
+import {
+  getCargos,
+  getCargo,
+  createCargo,
+  deleteCargo,
+} from "../controller/Cargo.js";
 const router = Router();
-router.get('/crud', getEmpleados);
 
-router.get("/crud/:id",getEmpleado);
+/*---------Empleados-----------*/
+router.get("/empledo", getEmpleados);
 
-router.post("/crud",createEmpleado);
+router.get("/empleado/:id", getEmpleado);
 
-router.put("/crud/:id",updateEmpleado);
+router.post("/empleado", createEmpleado);
 
-router.delete("/crud/:id",deleteEmpleado);
-export default router
+router.put("/empleado/:id", updateEmpleado);
+
+router.delete("/empleado/:id", deleteEmpleado);
+
+/*-----------Usuarios-------------*/
+router.get("/usuario", getUsuarios);
+router.get("/usuario/:id", getUsuario);
+router.post("/usuario", createUsuario);
+router.put("/usuario/:id", updateUsuario);
+router.delete("/usuario/:id", deleteUsuario);
+
+/*-----------Cargos-------------*/
+router.get("/cargo", getCargos);
+router.get("/cargo/:id", getCargo);
+router.post("/cargo", createCargo);
+router.delete("/cargo/:id", deleteCargo);
+export default router;

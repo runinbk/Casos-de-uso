@@ -25,11 +25,11 @@ export const getEmpleado = async (req, res) => {
 };
 export const createEmpleado = async (req, res) => {
   try {
-    const { nombre, apellido, ci, direccion, sexo /*,idCargo, idUsuario */ } =
+    const { nombre, apellido, ci, direccion, sexo ,idCargo, idUsuario } =
     req.body;
   const [result] = await pool.query(
-    "insert into EMPLEADO(nombre, apellido,ci,direccion,sexo /*,idCargo, idUsuario */) values(?,?)",
-    [nombre, apellido, ci, direccion, sexo /*,idCargo, idUsuario */]
+    "insert into EMPLEADO(nombre, apellido,ci,direccion,sexo ,idCargo, idUsuario ) values(?,?)",
+    [nombre, apellido, ci, direccion, sexo ,idCargo, idUsuario ]
   );
   res.json({
     id: result.insertId,
@@ -38,8 +38,8 @@ export const createEmpleado = async (req, res) => {
     ci,
     direccion,
     sexo,
-    /*,idCargo, 
-    idUsuario */
+    idCargo, 
+    idUsuario 
   });
   } catch (error) {
     return res.estatus(500).json({ message: error.message });
