@@ -2,25 +2,25 @@ import { pool } from "../db/db.js";
 
 export const getUsuarios = async (req, res) => {
   try {
-    const result = await pool.query("select * from USUARIO ");
+    const [result] = await pool.query("select * from USUARIO ");
     res.json(result);
   } catch (error) {
-    return res.estatus(500).json({ message: error.message });
+    return res.status(500).json({ message: error.message });
   }
 };
 export const getUsuario = async (req, res) => {
   try {
-    const result = await pool.query("select * from USUARIO where id=?", [
-      req.params.id,
+    const [result] = await pool.query("select * from USUARIO where id=?", [
+      req.params.id
     ]);
     if (result.length === 0) {
       return res
-        .estatus(400)
+        .status(400)
         .json({ message: "No hay ningun usuario resgistrado" });
     }
     res.json(result[0]);
   } catch (error) {
-    return res.estatus(500).json({ message: error.message });
+    return res.status(500).json({ message: error.message });
   }
 };
 export const createUsuario = async (req, res) => {
@@ -38,31 +38,31 @@ export const createUsuario = async (req, res) => {
    
   });
   } catch (error) {
-    return res.estatus(500).json({ message: error.message });
+    return res.status(500).json({ message: error.message });
   }
 };
 export const updateUsuario = async (req, res) => {
   try {
-    const result = await pool.query("update USUARIO set ? where id=?", [
+    const [result] = await pool.query("update USUARIO set ? where id=?", [
       req.body,
-      req.params.id,
+      req.params.id
     ]);
     res.json(result);
   } catch (error) {
-    return res.estatus(500).json({ message: error.message });
+    return res.status(500).json({ message: error.message });
   }
 };
 export const deleteUsuario = async (req, res) => {
   try {
-    const result = await pool.query("delete  from USUARIO where id=?", [
+    const [result] = await pool.query("delete from USUARIO where id=?", [
       req.params.id,
     ]);
-    if(result.affectedRows===0)
+    if(result.affectedRows === 0)
     {
-      return res.estatus(404).json({message:'No se encuentra ningun usuario'})
+      return res.status(404).json({message:'No se encuentra ningun usuario'})
     }
-    return res.senStatus(204);
+    return res.sendStatus(204);
   } catch (error) {
-    return res.estatus(500).json({ message: error.message });
-  }
+    return res.status(500).json({ message: error.message });
+  }1
 };

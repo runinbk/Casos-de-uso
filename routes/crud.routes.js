@@ -17,12 +17,13 @@ import {
   getCargos,
   getCargo,
   createCargo,
+  updateCargo,
   deleteCargo,
 } from "../controller/Cargo.js";
 const router = Router();
 
 /*---------Empleados-----------*/
-router.get("/empledo", getEmpleados);
+router.get("/empleado", getEmpleados);
 
 router.get("/empleado/:id", getEmpleado);
 
@@ -43,5 +44,6 @@ router.delete("/usuario/:id", deleteUsuario);
 router.get("/cargo", getCargos);
 router.get("/cargo/:id", getCargo);
 router.post("/cargo", createCargo);
+router.put("/cargo/:id",updateCargo)
 router.delete("/cargo/:id", deleteCargo);
 export default router;
