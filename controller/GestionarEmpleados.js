@@ -8,9 +8,10 @@ export const getEmpleados = async (req, res) => {
     return res.status(500).json({ message: error.message });
   }
 };
+
 export const getEmpleado = async (req, res) => {
   try {
-    const [result]  = await pool.query("select * from EMPLEADO where id=?", [
+    const [result] = await pool.query("select * from EMPLEADO where id=?", [
       req.params.id,
     ]);
     if (result.length === 0) {
@@ -23,31 +24,33 @@ export const getEmpleado = async (req, res) => {
     return res.status(500).json({ message: error.message });
   }
 };
+
 export const createEmpleado = async (req, res) => {
   try {
-    const { nombre, apellido, ci, direccion, sexo ,idCargo, idUsuario } =
-    req.body;
-  const [result] = await pool.query(
-    "insert into EMPLEADO( nombre, apellido, ci, direccion, sexo ,idCargo, idUsuario ) values(?,?,?,?,?,?,?)",
-    [ nombre, apellido, ci, direccion, sexo ,idCargo, idUsuario ]
-  );
-  res.json({
-    id: result.insertId,
-    nombre,
-    apellido,
-    ci,
-    direccion,
-    sexo,
-    idCargo, 
-    idUsuario 
-  });
+    const { nombre, apellido, ci, direccion, sexo, idCargo, idUsuario } =
+      req.body;
+    const [result] = await pool.query(
+      "insert into EMPLEADO( nombre, apellido, ci, direccion, sexo ,idCargo, idUsuario ) values(?,?,?,?,?,?,?)",
+      [nombre, apellido, ci, direccion, sexo, idCargo, idUsuario]
+    );
+    res.json({
+      id: result.insertId,
+      nombre,
+      apellido,
+      ci,
+      direccion,
+      sexo,
+      idCargo,
+      idUsuario,
+    });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
 };
+
 export const updateEmpleado = async (req, res) => {
   try {
-    const [result]  = await pool.query("update EMPLEADO set ? where id=?", [
+    const [result] = await pool.query("update EMPLEADO set ? where id=?", [
       req.body,
       req.params.id,
     ]);
@@ -56,14 +59,16 @@ export const updateEmpleado = async (req, res) => {
     return res.status(500).json({ message: error.message });
   }
 };
+
 export const deleteEmpleado = async (req, res) => {
   try {
-    const [result]  = await pool.query("delete  from EMPLEADO where id=?", [
+    const [result] = await pool.query("delete  from EMPLEADO where id=?", [
       req.params.id,
     ]);
-    if(result.affectedRows===0)
-    {
-      return res.status(404).json({message:'No se encuentra ningun empleado'})
+    if (result.affectedRows === 0) {
+      return res
+        .status(404)
+        .json({ message: "No se encuentra ningun empleado" });
     }
     return res.sendStatus(204);
   } catch (error) {
